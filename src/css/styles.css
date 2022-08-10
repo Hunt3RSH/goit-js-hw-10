@@ -20,6 +20,7 @@ body {
 }
 img {
   display: block;
+  padding-right: 10px;
 }
 ul {
   list-style: none;
@@ -32,6 +33,11 @@ li {
   align-items: center;
 }
 p {
-  padding-left: 10px;
   font-size: 20px;
+}
+.title {
+  display: flex;
+  font-size: 30px;
+  align-items: center;
+  font-weight: bold;
 }
