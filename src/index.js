@@ -28,6 +28,7 @@ const getDateCountry = countryName => {
 
 const onChange = debounce(e => {
   e.preventDefault();
+  updateMarkup();
 
   const value = e.target.value.trim();
   if (!value) return updateMarkup();
