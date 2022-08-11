@@ -1,9 +1,5 @@
 import { refs } from '../refs';
 
-export const addMarkup = (markup = '') => {
+export const updateMarkup = (markup = '') => {
   refs.countryDetails.innerHTML = markup;
-};
-
-export const markupClear = () => {
-  refs.countryDetails.innerHTML = '';
 };

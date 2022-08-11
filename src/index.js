@@ -2,34 +2,35 @@ import './css/styles.css';
 import { fetchCountries } from './fetchCountries';
 import { refs } from './refs';
 import { dataMoreTen, onError } from './helpers';
-import { addMarkup, markupClear } from './service';
+import { updateMarkup } from './service';
 import { createListCountry, createCountryMarkup } from './markup';
 import debounce from 'lodash.debounce';
 
 const DEBOUNCE_DELAY = 300;
 
 const getDateCountry = countryName => {
-  if (countryName.length < 2) {
-    return dataMoreTen();
-  }
-
   fetchCountries(countryName)
     .then(country => {
-      const newArray = country.splice(0, 10);
+      const newArray = country;
       if (newArray.length === 1) {
-        addMarkup(createCountryMarkup(newArray));
+        updateMarkup(createCountryMarkup(newArray));
+      } else if (newArray.length > 1 && newArray.length <= 10) {
+        updateMarkup(createListCountry(newArray));
       } else {
-        addMarkup(createListCountry(newArray));
+        dataMoreTen();
       }
     })
-    .catch(onError);
+    .catch(() => {
+      onError();
+      updateMarkup();
+    });
 };
 
 const onChange = debounce(e => {
   e.preventDefault();
 
   const value = e.target.value.trim();
-  if (!value) return markupClear();
+  if (!value) return updateMarkup();
   getDateCountry(value);
 }, DEBOUNCE_DELAY);
 
